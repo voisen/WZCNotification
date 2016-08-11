@@ -16,7 +16,6 @@ One line of code to achieve the front notification
 ##效果图
 
 ![通知效果](001.PNG)
-                 
 ![通知效果](002.PNG)
 
 ###      通知状态                  展开通知状态
