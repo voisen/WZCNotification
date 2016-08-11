@@ -64,25 +64,37 @@ static NSDictionary *infoPlist;
     UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 5, Noti_Height * 0.34, Noti_Height * 0.34)];
     NSString *iconName = [infoPlist[@"CFBundleIcons"][@"CFBundlePrimaryIcon"][@"CFBundleIconFiles"] lastObject];
     imgView.image = [UIImage imageNamed:iconName];
+    if (imgView.image == nil) {
+        imgView.backgroundColor = [UIColor whiteColor];
+    }
     imgView.layer.cornerRadius = 5;
     imgView.layer.masksToBounds = YES;
     [noti_window addSubview:imgView];
-    
-    NSString *appName = infoPlist[@"CFBundleDisplayName"];
-    
-    if (appName == nil || [appName isEqualToString:@""]) {
-        appName = @"新的消息";
+    NSString *msg_title;
+    if (title == nil || [title isEqualToString:@""]) {
+        msg_title = infoPlist[@"CFBundleDisplayName"];
+    }else{
+        msg_title = title;
+    }
+    if (msg_title == nil || [msg_title isEqualToString:@""]) {
+        msg_title = @"新的消息";
     }
     UIFont *title_font = [UIFont systemFontOfSize:Font_Size weight:bold];
-    CGSize title_size = [appName sizeWithAttributes:@{NSFontAttributeName:title_font}];
+    CGSize title_size = [msg_title sizeWithAttributes:@{NSFontAttributeName:title_font}];
+    
+    CGFloat title_maxWidth = noti_window.frame.size.width - (CGRectGetMaxX(imgView.frame) + 5) - 40;
+    
+    if (title_size.width > title_maxWidth) {
+        title_size.width = title_maxWidth;
+    }
     
     UILabel *noti_title = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(imgView.frame) + 5, imgView.center.y - title_size.height / 2.0f, title_size.width, title_size.height)];
     noti_title.font = title_font;
-    noti_title.text = appName;
+    noti_title.text = msg_title;
     noti_title.textColor = [UIColor whiteColor];
     [noti_window addSubview:noti_title];
     
-    UILabel *title_now = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(noti_title.frame) + 10, noti_title.frame.origin.y,40, noti_title.frame.size.height)];
+    UILabel *title_now = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(noti_title.frame) + 6, noti_title.frame.origin.y,40, noti_title.frame.size.height)];
     title_now.textColor = [UIColor whiteColor];
     title_now.text = @"现在";
     title_now.font = [UIFont systemFontOfSize:Font_Size - 1];
@@ -156,8 +168,12 @@ static NSDictionary *infoPlist;
     UILabel *label = [noti_window viewWithTag:10];
     label.numberOfLines = 0;
     CGFloat height = [label.text boundingRectWithSize:CGSizeMake(label.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:label.font} context:nil].size.height;
+
     CGRect window_frame = noti_window.frame;
     window_frame.size.height = window_frame.size.height + height - label.frame.size.height + 5;
+    if (window_frame.size.height <= Noti_Height) {
+        return;
+    }
     CGRect label_frame = label.frame;
     label_frame.size.height = height;
     UIButton *btn = [noti_window viewWithTag:11];
@@ -192,6 +208,7 @@ static NSDictionary *infoPlist;
     noti.alertBody = msg;
     noti.fireDate = [NSDate date];
     [[UIApplication sharedApplication] scheduleLocalNotification:noti];
+    
 }
 
 + (void)playSystemSound{

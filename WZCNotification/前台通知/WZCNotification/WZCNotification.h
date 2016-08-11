@@ -36,9 +36,9 @@
 + (void)setDelegate:(id<WZCNotificationDelegate>)delegate;
 
 /**
- *  设置通知栏是否显示
+ *  设置通知栏是否显示(容易递归,建议使用默认)
  *
- *  @param enable 默认为显示
+ *  @param enable 默认为不显示
  */
 + (void)setBackgroundNotiEnable:(BOOL)enable;
 
