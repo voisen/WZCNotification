@@ -39,8 +39,8 @@ static WZCNotification *noti;
 
 UIWindow *noti_window;
 NSTimer *timer;
-static BOOL backgroundNotiEnalble;
-static BOOL playSystemSound;
+static BOOL backgroundNotiEnalble = NO;
+static BOOL playSystemSound = YES;
 static NSDictionary *infoPlist;
 
 + (void)wzc_notificationWithTitle:(NSString *)title msg:(NSString *)msg{
@@ -52,8 +52,6 @@ static NSDictionary *infoPlist;
     dispatch_once(&onceToken, ^{
         NSString *path = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
         infoPlist = [NSDictionary dictionaryWithContentsOfFile:path];
-        playSystemSound = YES;
-        backgroundNotiEnalble = NO;
     });
     
     
@@ -158,12 +156,8 @@ static NSDictionary *infoPlist;
     UILabel *label = [noti_window viewWithTag:10];
     label.numberOfLines = 0;
     CGFloat height = [label.text boundingRectWithSize:CGSizeMake(label.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:label.font} context:nil].size.height;
-
     CGRect window_frame = noti_window.frame;
     window_frame.size.height = window_frame.size.height + height - label.frame.size.height + 5;
-    if (window_frame.size.height <= Noti_Height) {
-        return;
-    }
     CGRect label_frame = label.frame;
     label_frame.size.height = height;
     UIButton *btn = [noti_window viewWithTag:11];

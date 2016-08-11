@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "70f3e2ab-71c2-f5bf-e43e-ce57b7db7bff",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "70f3e2ab-71c2-f5bf-e43e-ce57b7db7bff" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "70f3e2ab-71c2-f5bf-e43e-ce57b7db7bff" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B730A229-B82B-4881-8EC2-0A9EE1636A39",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "70f3e2ab-71c2-f5bf-e43e-ce57b7db7bff" : "WZCNotification.git\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "前台通知",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "trunk\/WZCNotification\/前台通知.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/voisen\/WZCNotification.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "70f3e2ab-71c2-f5bf-e43e-ce57b7db7bff"
+    }
+  ]
+}
