@@ -38,8 +38,8 @@ static WZCNotification *noti;
 
 UIWindow *noti_window;
 NSTimer *timer;
-BOOL backgroundNotiEnalble;
-BOOL playSystemSound;
+static BOOL backgroundNotiEnalble;
+static BOOL playSystemSound;
 static NSDictionary *infoPlist;
 
 + (void)wzc_notificationWithTitle:(NSString *)title msg:(NSString *)msg{
