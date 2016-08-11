@@ -54,8 +54,6 @@ static NSDictionary *infoPlist;
         playSystemSound = YES;
         backgroundNotiEnalble = YES;
     });
-    
-    [timer invalidate];
     if (noti_window) noti_window.hidden = YES;
     noti_window = [[UIWindow alloc]initWithFrame:CGRectMake(0, - Noti_Height,  [UIScreen mainScreen].bounds.size.width, Noti_Height)];
     
@@ -129,6 +127,8 @@ static NSDictionary *infoPlist;
     [UIView animateWithDuration:0.3 animations:^{
         noti_window.frame = frame;
     } completion:^(BOOL finished) {
+        [timer invalidate];
+        timer = nil;
         timer = [NSTimer timerWithTimeInterval:3 target:[self class] selector:@selector(dismiss) userInfo:nil repeats:NO];
         NSRunLoop *runloop = [NSRunLoop mainRunLoop];
         [runloop addTimer:timer forMode:NSRunLoopCommonModes];

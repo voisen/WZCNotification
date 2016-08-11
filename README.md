@@ -71,7 +71,7 @@ One line of code to achieve the front notification
 款四部分组成。" ];
 ~~~~
 
-##广告
+##推荐
 
 ### What ? 什么? 英文文档看不懂? 不会使用 MKNetworkKit ? 这么好的框架都不会?
 
