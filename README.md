@@ -66,7 +66,10 @@ One line of code to achieve the front notification
 
 ~~~~objc
 //你只需要调用这个方法
-[WZCNotification wzc_notificationWithTitle:nil msg:@"通知，是运用广泛的知照性公文。用来发布法规、规章，转发上级机关、同级机关和不相隶属机关的公文，批转下级机关的公文，要求下级机关办理某项事务等。通知，一般由标题、主送单位（受文对象）、正文、落款四部分组成。" ];
+[WZCNotification wzc_notificationWithTitle:nil msg:
+@"通知，是运用广泛的知照性公文。用来发布法规、规章，转发上级机关、同级机关和不相隶属机关的公文，
+批转下级机关的公文，要求下级机关办理某项事务等。通知，一般由标题、主送单位（受文对象）、正文、落
+款四部分组成。" ];
 ~~~~
 
 ##广告
