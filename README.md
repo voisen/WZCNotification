@@ -15,9 +15,9 @@ One line of code to achieve the front notification
 
 ##效果图
 
-![通知效果](001.png)
+![通知效果](001.PNG)
 
-![通知效果](002.png)
+![通知效果](002.PNG)
 
 
 ## WZCNotification
