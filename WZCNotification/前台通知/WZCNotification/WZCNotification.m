@@ -44,20 +44,27 @@ static BOOL playSystemSound = YES;
 static NSDictionary *infoPlist;
 
 + (void)wzc_notificationWithTitle:(NSString *)title msg:(NSString *)msg{
-
-   if (![[[UIApplication sharedApplication] currentUserNotificationSettings] types])
-       return;
+    
+    if (![[[UIApplication sharedApplication] currentUserNotificationSettings] types])
+        return;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSString *path = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
         infoPlist = [NSDictionary dictionaryWithContentsOfFile:path];
     });
-    
-    
+    //横竖屏适配
+    CGRect screenFrame = [UIScreen mainScreen].bounds;
     if (noti_window) noti_window.hidden = YES;
-    noti_window = [[UIWindow alloc]initWithFrame:CGRectMake(0, - Noti_Height,  [UIScreen mainScreen].bounds.size.width, Noti_Height)];
-    noti_window.hidden = NO;
+    noti_window = [[UIWindow alloc]init];
+    CGRect noti_window_frame;
+    CGFloat win_x = 0;
+    CGFloat win_y = 0;
+    CGFloat win_w = screenFrame.size.width;
+    CGFloat win_h = Noti_Height;
+    noti_window_frame = CGRectMake(win_x, win_y, win_w, win_h);
+    
+    noti_window.frame = CGRectMake(win_x, -win_h, win_w, win_h);    noti_window.hidden = NO;
     noti_window.backgroundColor = [UIColor colorWithRed:0.180 green:0.125 blue:0.051 alpha:1.00];
     noti_window.windowLevel = UIWindowLevelAlert;
     
@@ -138,7 +145,7 @@ static NSDictionary *infoPlist;
     if (backgroundNotiEnalble) [[self class] notification_systemWithTitle:title msg:msg];
     
     [UIView animateWithDuration:0.3 animations:^{
-        noti_window.frame = frame;
+        noti_window.frame = noti_window_frame;
     } completion:^(BOOL finished) {
         [timer invalidate];
         timer = nil;
@@ -168,10 +175,10 @@ static NSDictionary *infoPlist;
     UILabel *label = [noti_window viewWithTag:10];
     label.numberOfLines = 0;
     CGFloat height = [label.text boundingRectWithSize:CGSizeMake(label.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:label.font} context:nil].size.height;
-
+    
     CGRect window_frame = noti_window.frame;
     window_frame.size.height = window_frame.size.height + height - label.frame.size.height + 5;
-    if (window_frame.size.height <= Noti_Height) {
+    if (window_frame.size.height <= Noti_Height || noti_window.frame.size.height > Noti_Height) {
         return;
     }
     CGRect label_frame = label.frame;
@@ -202,7 +209,7 @@ static NSDictionary *infoPlist;
 }
 
 + (void)notification_systemWithTitle:(NSString *)title msg:(NSString *)msg{
-
+    
     UILocalNotification *noti = [[UILocalNotification alloc]init];
     noti.alertTitle = title;
     noti.alertBody = msg;
@@ -218,14 +225,14 @@ static NSDictionary *infoPlist;
 }
 
 + (void)setBackgroundNotiEnable:(BOOL)enable{
-
+    
     backgroundNotiEnalble = enable;
-
+    
 }
 
 + (void)setPlaySystemSound:(BOOL)enable{
-
+    
     playSystemSound = enable;
-
+    
 }
 @end

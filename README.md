@@ -10,6 +10,10 @@ One line of code to achieve the front notification
 * 简单易用,一行代码搞定
 * 其他...
 
+##更新日志
+* 2016.8.12 重要修复,其他方向上的提示显示 bug 升级为 V2.0
+* 2016.8.11 上传V1.0,添加说明文档
+
 ##缺陷
 * 不支持 pod
 
